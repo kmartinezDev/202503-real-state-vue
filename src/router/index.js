@@ -49,6 +49,7 @@ router.beforeEach(async (to, from, next) => {
   if(requiresAuth) {
     // Comprueba si el usuario está autenticado
     try {
+      console.log('Checking user authentication...')
       await authenticateUser()
       next()
     } 

@@ -9,6 +9,13 @@ This template should help get you started developing with Vue 3 in Vite.
 ## Customize configuration
 
 See [Vite Configuration Reference](https://vite.dev/config/).
+https://vuefire.vuejs.org/guide/getting-started.html
+https://firebase.google.com/docs/build?hl=es-419
+https://firebase.google.com/docs/auth/web/password-auth?hl=es-419
+https://vuetifyjs.com/
+https://tobiasahlin.com/spinkit/
+https://headlessui.com/
+https://firebase.google.com/docs/firestore/manage-data/add-data?hl=es-419
 
 ## Project Setup
 
