@@ -1,5 +1,5 @@
 <script setup>
-    import { useRoute } from 'vue-router';
+    import { useRoute, useRouter } from 'vue-router';
     import { useFirestore, useDocument } from 'vuefire';
     import { doc, updateDoc } from 'firebase/firestore';
     import { watch } from 'vue';
@@ -28,6 +28,7 @@
     const pool = useField('pool', null, {initialValue: false})
 
     const route = useRoute();
+    const router = useRouter();
     
     // Obtenemos la propiedad a editar
     const db = useFirestore();
@@ -46,11 +47,31 @@
 
         setTimeout(() => {
             center.value = property.location;
-        }, 3000);
+        }, 2000);
     });
 
-    const submit = handleSubmit( values => {
-        console.log(values);
+    const submit = handleSubmit( async(values) => {
+
+        const {image, ...property} = values;
+        let data = {};
+
+        if(imageUrl.value){
+            data = {
+                ...property,
+                image: url.value,
+                location: center.value
+            }   
+        }
+        else{
+            data = {
+                ...property,
+                location: center.value
+            }
+        }
+
+        await updateDoc(docRef, data);
+
+        router.push({ name: 'admin-properties' });
     });
 </script>
 
@@ -83,6 +104,20 @@
 
             <div class="my-5">
                 <p class="font-weight-bold">Imagen Actual:</p>
+
+                <img 
+                    v-if="imageUrl"
+                    :src="imageUrl" 
+                    alt=""
+                    class="w-50"
+                >
+
+                <img 
+                    v-else
+                    :src="property?.image" 
+                    alt=""
+                    class="w-50"
+                >
             </div>
 
 
